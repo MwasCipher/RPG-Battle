@@ -70,5 +70,5 @@ class person:
         i = 1
 
         for spell in self.magic:
-            print(str(i) + ' ' + spell["name"], "(Cost: ", str(spell["mp"] + ")" )
+            print(str(i) + ' ' + spell["name"], "(Cost: ", str(spell["mp"] + ")" ))
             i += 1
