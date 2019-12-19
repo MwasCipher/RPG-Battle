@@ -11,6 +11,8 @@ class BColors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
+    # hp = hit_point
+
 
 class Person:
     def __init__(self, hp, magic_points, attack, defence, magic):
