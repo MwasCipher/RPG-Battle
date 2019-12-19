@@ -1,23 +1,23 @@
 import random
 
 
-class bcolors:
-    HEADER = '\033[95n'
-    OKBLUE = '\033[94n'
-    OKGREEN = '\033[92n'
-    WARNING = '\033[93n'
-    FAIL = '\033[91n'
-    ENDC = '\033[0n'
-    BOLD = '\033[1n'
-    UNDERLINE = '\033[4n'
+class BColors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
 
-class person:
-    def __init__(self, hp, mp, attack, defence, magic):
+class Person:
+    def __init__(self, hp, magic_points, attack, defence, magic):
         self.maxHp = hp
         self.hp = hp
-        self.maxMp = mp
-        self.mp = mp
+        self.maxMagic_points = magic_points
+        self.magic_points = magic_points
         self.attackHigh = attack + 10
         self.attackLow = attack - 10
         self.defence = defence
@@ -46,19 +46,19 @@ class person:
     def get_max_hp(self):
         return self.maxHp
 
-    def get_mp(self):
-        return self.mp
+    def get_magic_points(self):
+        return self.magic_points
 
-    def get_max_mp(self):
-        return self.maxMp
+    def get_max_magic_points(self):
+        return self.maxMagic_points
 
-    def reduce_mp(self, cost):
-        self.mp -= cost
+    def reduce_magic_points(self, cost):
+        self.magic_points -= cost
 
     def get_spell_name(self, i):
         return self.magic[i]["name"]
 
-    def get_spell_mp_cost(self, i):
+    def get_spell_magic_points_cost(self, i):
         return self.magic[i]["cost"]
 
     def choose_action(self):
@@ -74,5 +74,5 @@ class person:
         print("Magic")
 
         for spell in self.magic:
-            print(str(i) + ' ' + spell["name"], "(Cost: ", str(spell["mp"] + ")"))
+            print(str(i) + ' ' + spell["name"], "(Cost: ", str(spell["magic_points"] + ")"))
             i += 1
