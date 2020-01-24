@@ -35,20 +35,32 @@ while running:
 
         if cost > current_magic_point:
             print(BColors.FAIL, "\nYou Don't Have Enough Life", BColors.ENDC)
+            continue
 
-        print("You Attacked For: ", damage, "Points of Damage", "Enemy Hit Points: ", enemy.get_hp())
+        player.reduce_magic_points(cost)
+        enemy.take_damage(magic_damage)
+        print(BColors.OKBLUE, "\n", spell, "deals", str(magic_damage), "Points of Damage", BColors.ENDC)
+
+        print("You Attacked For: ", damage, "Points of Damage")
 
     # running = False
 
     enemy_choice = 1
     enemy_damage = enemy.generate_damage()
     player.take_damage(enemy_damage)
-    print("Enemy Attacks For", enemy_damage, "Player Hit Point: ", player.get_hp())
+    print("Enemy Attacks For", enemy_damage)
+    print("====================================")
+    print("Enemy Hit Points: ", BColors.FAIL,
+          str(enemy.get_hp()), "/", str(enemy.get_max_hp()), BColors.ENDC, "\n")
+    print("Your Hit Points: ", BColors.OKGREEN,
+          str(player.get_hp(), "/", str(player.get_max_hp())), "\n")
+    print("Your Magic Points: ", BColors.OKBLUE,
+          str(player.get_magic_points(), "/", str(player.get_max_magic_points())))
 
     if enemy.get_hp() == 0:
-        print(BColors.OKGREEN, "You Fucking Win......#@!#@!#@!@##$$^$&%^&", BColors.ENDC)
+        print(BColors.OKGREEN, "You Fucking Win......#@!#@!#@!@#$$#&&!!!", BColors.ENDC)
         running = False
 
     elif player.get_hp() == 0:
-        print(BColors.FAIL, "You Fucking Lost Loser......#@!#@!#@!@##$$^$&%^&", BColors.ENDC)
+        print(BColors.FAIL, "You Fucking Lost You Dumb Loser......#@!#@!#@!@##$$^$&%^&", BColors.ENDC)
         running = False
