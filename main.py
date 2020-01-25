@@ -81,10 +81,10 @@ while running:
         if item_choice == -1:
             continue
 
+        item = player.items[item_choice]
         if item.item_type == "potion":
-            player.heal()
-
-
+            player.heal(item.prop)
+            print(BColors.OKGREEN, "\n", item.name, "Heals For", str(item.prop), "HP", BColors.ENDC)
 
         # print("You Attacked For: ", damage, "Points of Damage")
 
