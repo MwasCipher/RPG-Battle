@@ -29,11 +29,11 @@ class Person:
     def generate_damage(self):
         return random.randrange(self.attackLow, self.attackHigh)
 
-    def generate_spell_damage(self, i):
-        magic_low = self.magic[i]["damage"] - 5
-        magic_high = self.magic[i]["damage"] + 5
-
-        return random.randrange(magic_low, magic_high)
+    # def generate_spell_damage(self, i):
+    #     magic_low = self.magic[i]["damage"] - 5
+    #     magic_high = self.magic[i]["damage"] + 5
+    #
+    #     return random.randrange(magic_low, magic_high)
 
     def take_damage(self, damage):
         self.hp -= damage
@@ -41,6 +41,11 @@ class Person:
         if self.hp < 0:
             self.hp = 0
         return self.hp
+
+    def heal(self, damage):
+        self.hp += damage
+        if self.hp > self.maxHp:
+            self.hp = self.maxHp
 
     def get_hp(self):
         return self.hp
@@ -57,11 +62,11 @@ class Person:
     def reduce_magic_points(self, cost):
         self.magic_points -= cost
 
-    def get_spell_name(self, i):
-        return self.magic[i]["name"]
-
-    def get_spell_magic_points_cost(self, i):
-        return self.magic[i]["cost"]
+    # def get_spell_name(self, i):
+    #     return self.magic[i]["name"]
+    #
+    # def get_spell_magic_points_cost(self, i):
+    #     return self.magic[i]["cost"]
 
     def choose_action(self):
         i = 1
@@ -76,5 +81,5 @@ class Person:
         print("Magic")
 
         for spell in self.magic:
-            print(str(i), ' ', spell["name"], "(Cost: ", spell["damage"], ")")
+            print(str(i), ' ', spell.name, "(Cost: ", spell.damage, ")")
             i += 1

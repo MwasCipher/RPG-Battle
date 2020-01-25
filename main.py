@@ -1,11 +1,21 @@
 from classes.game import Person, BColors
+from classes.magic import Spell
 
-magic = [{"name": "Fire", "cost": 10, "damage": 100},
-         {"name": "Thunder", "cost": 10, "damage": 124},
-         {"name": "Blizzard", "cost": 10, "damage": 100}]
+# Create Black Magic
 
-player = Person(460, 65, 60, 34, magic)
-enemy = Person(1200, 65, 45, 25, magic)
+fire = Spell("Fire", 10, 100, "black")
+thunder = Spell("Thunder", 10, 124, "black")
+blizzard = Spell("Blizzard", 10, 100, "black")
+meteor = Spell("Meteor", 20, 200, "black")
+quake = Spell("Meteor", 12, 120, "black")
+
+# Create Whit Magic
+
+cure = Spell("Cure", 12, 120, "white")
+cura = Spell("Cura", 18, 200, "white")
+
+player = Person(460, 65, 60, 34, [fire, thunder, blizzard, cure, cura])
+enemy = Person(1200, 65, 45, 25, [])
 
 running = True
 i = 0
@@ -27,21 +37,24 @@ while running:
     elif index == 1:
         player.choose_magic()
         magic_choice = int(input("Select Magic Spell: ")) - 1
-        magic_damage = player.generate_spell_damage(magic_choice)
-        spell = player.get_spell_name(magic_choice)
-        cost = player.get_spell_magic_points_cost(magic_choice)
+        # magic_damage = player.generate_spell_damage(magic_choice)
+        # spell = player.get_spell_name(magic_choice)
+        # cost = player.generate_damage(magic_choice)
+
+        spell = player.magic[magic_choice]
+        magic_damage = spell.generate_spell_damage()
 
         current_magic_point = player.get_magic_points()
 
-        if cost > current_magic_point:
+        if spell.cost > current_magic_point:
             print(BColors.FAIL, "\nYou Don't Have Enough Life", BColors.ENDC)
             continue
 
-        player.reduce_magic_points(cost)
+        player.reduce_magic_points(spell.cost)
         enemy.take_damage(magic_damage)
-        print(BColors.OKBLUE, "\n", spell, "deals", str(magic_damage), "Points of Damage", BColors.ENDC)
+        print(BColors.OKBLUE, "\n", spell.name, "deals", str(magic_damage), "Points of Damage", BColors.ENDC)
 
-        print("You Attacked For: ", damage, "Points of Damage")
+        # print("You Attacked For: ", damage, "Points of Damage")
 
     # running = False
 
