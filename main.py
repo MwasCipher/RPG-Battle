@@ -26,7 +26,8 @@ megaelixer = Item("Mega Elixer", "mega elixer", "Restores HP/MP one Party Member
 grenade = Item("Grenade", "attack", "Deals damage of 500 HP", 500)
 
 player_spells = [fire, thunder, blizzard, cure, cura]
-player_items = [potion, hipotion, superpotion, elixer, megaelixer]
+player_items = [{"item": potion, "quantity": 15}, {"item": hipotion, "quantity": 5}, {"item": superpotion, "quantity": 5},
+                {"item": elixer, "quantity": 5}, {"item": megaelixer, "quantity": 2}, {"item": grenade, "quantity": 5},]
 
 player = Person(460, 65, 60, 34, player_spells, player_items)
 enemy = Person(1200, 65, 45, 25, [], [])
@@ -85,6 +86,15 @@ while running:
         if item.item_type == "potion":
             player.heal(item.prop)
             print(BColors.OKGREEN, "\n", item.name, "Heals For", str(item.prop), "HP", BColors.ENDC)
+
+        elif item.item_type == "elixer":
+            player.hp = player.maxHp
+            player.magic_points = player.maxMagic_points
+            print(BColors.OKGREEN, "\n", item.name, "Heals For", str(item.prop), "HP", BColors.ENDC)
+
+        elif item.item_type == "attack":
+            enemy.take_damage(item.prop)
+            print(BColors.FAIL, "\n", item.name, "Deals",str(item.prop), "Points of Damage", BColors.ENDC)
 
         # print("You Attacked For: ", damage, "Points of Damage")
 
