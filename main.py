@@ -21,9 +21,15 @@ potion = Item("Potion", "potion", "Heals 50 HP", 50)
 hipotion = Item("Hi-Potion", "potion", "Heals 100 HP", 100)
 superpotion = Item("Super-Potion", "super potion", "Heals 500 HP", 500)
 elixer = Item("Elixer", "elixer", "Restores HP/MP one Party Member", 999)
+megaelixer = Item("Mega Elixer", "mega elixer", "Restores HP/MP one Party Member", 9999)
 
-player = Person(460, 65, 60, 34, [fire, thunder, blizzard, cure, cura])
-enemy = Person(1200, 65, 45, 25, [])
+grenade = Item("Grenade", "attack", "Deals damage of 500 HP", 500)
+
+player_spells = [fire, thunder, blizzard, cure, cura]
+player_items = [potion, hipotion, superpotion, elixer, megaelixer]
+
+player = Person(460, 65, 60, 34, player_spells, player_items)
+enemy = Person(1200, 65, 45, 25, [], [])
 
 running = True
 i = 0
@@ -67,6 +73,18 @@ while running:
         elif spell.type == "black":
             enemy.take_damage(magic_damage)
             print(BColors.OKBLUE, "\n", spell.name, "deals", str(magic_damage), "Points of Damage", BColors.ENDC)
+
+    if index == 2:
+        player.choose_item()
+        item_choice = int(input("Select Item: ")) - 1
+
+        if item_choice == -1:
+            continue
+
+        if item.item_type == "potion":
+            player.heal()
+
+
 
         # print("You Attacked For: ", damage, "Points of Damage")
 
