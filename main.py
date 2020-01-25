@@ -82,7 +82,15 @@ while running:
         if item_choice == -1:
             continue
 
-        item = player.items[item_choice]
+        item = player.items[item_choice]["item"]
+
+        if item[item_choice]["quantity"] == 0:
+            print(BColors.FAIL, "\n", "None Left", BColors.ENDC)
+            continue
+
+        player.items[item_choice]["quantity"] -= 1
+
+
         if item.item_type == "potion":
             player.heal(item.prop)
             print(BColors.OKGREEN, "\n", item.name, "Heals For", str(item.prop), "HP", BColors.ENDC)
