@@ -51,8 +51,14 @@ while running:
             continue
 
         player.reduce_magic_points(spell.cost)
-        enemy.take_damage(magic_damage)
-        print(BColors.OKBLUE, "\n", spell.name, "deals", str(magic_damage), "Points of Damage", BColors.ENDC)
+
+        if spell.type == "white":
+            player.heal(magic_damage)
+            print(BColors.OKBLUE, "\n", spell.name, "Heals For", str(magic_damage), "HP", BColors.ENDC)
+
+        elif spell.type == "black":
+            enemy.take_damage(magic_damage)
+            print(BColors.OKBLUE, "\n", spell.name, "deals", str(magic_damage), "Points of Damage", BColors.ENDC)
 
         # print("You Attacked For: ", damage, "Points of Damage")
 
